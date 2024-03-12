@@ -33,7 +33,7 @@ function SearchBar(){
           <option value="">All Categories</option>
           {categoryList.map((category) => {
             return (
-              <option value={category.slug}>
+              <option key={category.slug} value={category.slug}>
                 {category.slug}
               </option>
             );
