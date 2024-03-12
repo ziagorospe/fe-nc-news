@@ -14,7 +14,8 @@ function CommentList(){
     },[])
 
     return (
-    <>
+    <>  
+        <h2>Comments: {commentList.length}</h2>
         {commentList.map((comment)=>{
             return(
             <div key={comment.comment_id}>
