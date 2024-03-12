@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import FocusArticleContext from "../../contexts/FocusArticle"
 import UserContext from "../../contexts/User"
 import MessageContext from "../../contexts/Message"
@@ -10,9 +10,13 @@ function NewComment(props){
     const {setResponseMessage} = useContext(MessageContext)
     const {commentList} = props
     const {setCommentList} = props
+    const [commentText, setCommentText] = useState("")
+    const [commentMessage, setCommentMessage] = useState("")
 
     function postComment(event){
         event.preventDefault()
+        setCommentMessage(commentText)
+        setCommentText("")
         setResponseMessage("")
         if(currentUser){
             const messageToPost = event.target[0].value
@@ -34,14 +38,17 @@ function NewComment(props){
             })
         } else {
             setResponseMessage("Go log in to comment")
-        }
-        
+        }  
+    }
+
+    function changeText(event){
+        setCommentText(event.target.value)
     }
 
     return (<form onSubmit={postComment}>
         <label htmlFor="comment-text">What's on your mind?:</label>
-        <input id="comment-text" type="text" required/>
-        <button >Post!</button>
+        <input onChange={changeText} value={commentText} id="comment-text" type="text" placeholder="Write..." required/>
+        <button type="submit">Post!</button>
     </form>)
 }
 
