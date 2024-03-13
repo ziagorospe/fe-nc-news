@@ -25,7 +25,7 @@ function ArticleList(props){
                     <h3>Topic: {article.topic}</h3>
                     <h3>Date {article.created_at}</h3>
                     <ArticleVotes article={article} index={index} voteList={voteList} setVoteList={setVoteList}/>
-                    <Link to="/article" >
+                    <Link to={`/article/${article.article_id}`} >
                         <h4 onClick={setSelectedArticle} value={article.article_id}>Comments: {article.comment_count}</h4>
                     </Link>
                 </article>)

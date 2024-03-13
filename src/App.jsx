@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, useLocation} from 'react-router-dom';
 import axios from 'axios'
 import Home from "./components/Home/Home"
 import UserContext from "./contexts/User"
@@ -21,6 +21,11 @@ function App() {
   })
   const [focusArticle, setFocusArticle] = useState([])
   const [responseMessage, setResponseMessage] = useState("")
+  const location = useLocation();
+
+  useEffect(()=>{
+    setResponseMessage("")
+  },[location])
 
   return (
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
@@ -34,7 +39,7 @@ function App() {
               <Route path="/" element={
                 <Home />
               }/>
-              <Route path="article" element={
+              <Route path="article/:id" element={
                 <Article focusArticle={focusArticle}/>
               } />
             

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import FocusArticleContext from "../../contexts/FocusArticle"
 import axios from "axios"
 import CommentList from "../Comments/CommentList"
@@ -12,10 +12,11 @@ function Article(props){
     const [isLoading, setIsLoading] = useState(true)
     const [commentList, setCommentList] = useState([])
     const [voteList, setVoteList] = useState([])
+    const { id } = useParams();
 
     useEffect(()=>{
         setIsLoading(true)
-        axios.get(`https://backend-nc-news-project.onrender.com/api/articles/${focusArticle}`)
+        axios.get(`https://backend-nc-news-project.onrender.com/api/articles/${id}`)
         .then((response)=>{
             setFetchedArticle(response.data.article)
             setVoteList([response.data.article.votes])

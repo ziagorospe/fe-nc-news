@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { useParams } from 'react-router-dom'
 import FocusArticleContext from "../../contexts/FocusArticle"
 import axios from "axios"
 import UserContext from "../../contexts/User"
@@ -11,10 +12,11 @@ function CommentList(props){
     const {commentList} = props
     const {setCommentList} = props
     const [isLoading, setIsLoading] = useState(true)
+    const { id } = useParams();
 
     useEffect(()=>{
         setIsLoading(true)
-        axios.get(`https://backend-nc-news-project.onrender.com/api/articles/${focusArticle}/comments`)
+        axios.get(`https://backend-nc-news-project.onrender.com/api/articles/${id}/comments`)
         .then((response)=>{
             setCommentList([...response.data.articleComments])
         })

@@ -47,6 +47,7 @@ function NewComment(props){
 
     return (<form onSubmit={postComment}>
         <label htmlFor="comment-text">What's on your mind?:</label>
+        <br/>
         <input onChange={changeText} value={commentText} id="comment-text" type="text" placeholder="Write..." required/>
         <button type="submit">Post!</button>
     </form>)
