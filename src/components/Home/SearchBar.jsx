@@ -7,6 +7,8 @@ function SearchBar(props){
   const [categoryList, setCategoryList] = useState([])
   const {currentCategory} = props
   const {setCurrentCategory} = props
+  const {setArticleQueries} = props
+  const {articleQueries} = props
 
   useEffect(()=>{
       axios.get('https://backend-nc-news-project.onrender.com/api/topics')
@@ -22,12 +24,24 @@ function SearchBar(props){
       setSearchParams({topic: event.target.value}) 
     } else {
       setSearchParams("")
+    } 
+  }
+
+  function submitQueries(event){
+    event.preventDefault()
+    const sortBy = event.target[0].value
+    const order = event.target[1].value
+    if(currentCategory){
+      setSearchParams({topic: currentCategory, sort: sortBy, order: order})
+    } else {
+      setSearchParams({sort: sortBy, order: order})
     }
     
+    setArticleQueries({sort: sortBy, order: order})
   }
 
   return (
-      <form>
+      <form onSubmit={submitQueries}>
           <div>
               <select name="Sort By">
                   <option value="">Sort By</option>
