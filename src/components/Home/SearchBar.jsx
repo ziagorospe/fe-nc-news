@@ -17,20 +17,22 @@ function SearchBar(props){
       })
   },[])
 
-
   function changeCategory(event){
     setCurrentCategory(event.target.value)
+    const tempParams = new URLSearchParams(searchParams)
     if(event.target.value){
-      setSearchParams({topic: event.target.value}) 
+      tempParams.set('topic', event.target.value)
+      setSearchParams(tempParams) 
     } else {
-      setSearchParams("")
+      tempParams.delete('topics')
+      setSearchParams(tempParams)
     } 
   }
 
-  function submitQueries(event){
-    event.preventDefault()
-    const sortBy = event.target[0].value
-    const order = event.target[1].value
+  function queryAdvanced(event){
+    const args = event.target.value.split('&')
+    const sortBy = args[0]
+    const order = args[1]
     if(currentCategory){
       setSearchParams({topic: currentCategory, sort: sortBy, order: order})
     } else {
@@ -41,22 +43,17 @@ function SearchBar(props){
   }
 
   return (
-      <form onSubmit={submitQueries}>
           <div>
-              <select name="Sort By">
-                  <option value="">Sort By</option>
-                  <option value="created_at">Latest</option>
-                  <option value="title">Title</option>
-                  <option value="votes">Votes</option>
-                  <option value="comment_count">Comments</option>
-              </select>
-              <select name="Order By">
-                  <option value="desc">Descending</option>
-                  <option value="asc">Ascending</option>
-              </select>
-          </div>
-          <div>
-      <input type="text" />
+              <select onChange={queryAdvanced} value={`${articleQueries.sort}&${articleQueries.order}`} name="Sort Adv">
+                <option value={(`created_at&desc` || "")}>Newest</option>
+                <option value={`comment_count&desc`}>Hottest</option>
+                <option value={`votes&desc`}>Top Rated</option>
+                <option value={`created_at&asc`}>Oldest</option>
+                <option value={`comment_count&asc`}>Most Ignored</option>
+                <option value={`votes&asc`}>Most Hated</option>
+                <option value={`title&asc`}>A-Z</option>
+                <option value={`title&desc`}>Z-A</option>
+            </select>
       <select value={currentCategory} onChange={changeCategory} name="Categories" id="">
         <option value="">All Categories</option>
         {categoryList.map((category) => {
@@ -67,9 +64,7 @@ function SearchBar(props){
           );
         })}
       </select>
-      <button type="submit">Search</button>
     </div>
-      </form>
   )
 }
 

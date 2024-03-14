@@ -4,6 +4,7 @@ import FocusArticleContext from "../../contexts/FocusArticle"
 import axios from "axios"
 import UserContext from "../../contexts/User"
 import MessageContext from "../../contexts/Message"
+import CommentVotes from "../Votes/CommentVotes"
 
 function CommentList(props){
     const {setResponseMessage} = useContext(MessageContext)
@@ -11,17 +12,10 @@ function CommentList(props){
     const {currentUser} = useContext(UserContext)
     const {commentList} = props
     const {setCommentList} = props
-    const [isLoading, setIsLoading] = useState(true)
     const { id } = useParams();
-
-    useEffect(()=>{
-        setIsLoading(true)
-        axios.get(`https://backend-nc-news-project.onrender.com/api/articles/${id}/comments`)
-        .then((response)=>{
-            setCommentList([...response.data.articleComments])
-        })
-        setIsLoading(false)
-    },[])
+    const [voteList, setVoteList] = useState(commentList.map((comment)=>{
+        return comment.votes
+    }))
 
     function deleteComment(event){
         setResponseMessage("")
@@ -36,10 +30,9 @@ function CommentList(props){
             setResponseMessage("Could not delete comment")
             setCommentList(previousCommentList)
         })
-
     }
 
-    return isLoading ? <p>Comments Loading...</p> :(
+    return (
     <>  
         <h2>Comments: {commentList.length}</h2>
         {commentList.map((comment, index)=>{
@@ -48,7 +41,7 @@ function CommentList(props){
                 <h4>Author: {comment.author}</h4>
                 <h4>Date: {comment.created_at}</h4>
                 <p>Description: {comment.body}</p>
-                <h5>Votes: {comment.votes}</h5>
+                <CommentVotes comment={comment} index={index} voteList={voteList} setVoteList={setVoteList}/>
                 {currentUser.username===comment.author ? 
                 <button id={comment.comment_id} value={index} onClick={deleteComment}>Delete Comment</button> : <></>}
             </div>

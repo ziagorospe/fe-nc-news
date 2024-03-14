@@ -3,7 +3,7 @@ import ArticleList from "../Articles/ArticleList";
 import SearchBar from "./SearchBar";
 import axios from "axios";
 import MessageContext from "../../contexts/Message";
-import { useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 function Home(){
   const [articleList, setArticleList] = useState([])
@@ -11,6 +11,7 @@ function Home(){
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentCategory, setCurrentCategory] = useState("")
   const [articleQueries, setArticleQueries] = useState({sort: "", order: ""})
+  const [isError, setIsError] = useState()
   
   
   useEffect(()=>{
@@ -60,11 +61,19 @@ function Home(){
         setArticleList([...response.data.articles])
         setIsLoading(false)
       })
+      .catch((err)=>{
+        setIsError(<p>{err.response.data.status + ' ' + err.response.data.msg}</p>)
+        setIsLoading(false)
+      })
     }, [currentCategory, articleQueries])
+
+    function reRender(event){
+      setSearchParams()
+    }
   
   return (<>
       <SearchBar currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} setArticleQueries={setArticleQueries} articleQueries={articleQueries}/>
-      {isLoading ? <p>Loading...</p> : <ArticleList articleList={articleList}/>}
+      {isLoading ? <p>Loading...</p> : ( !isError ? <ArticleList articleList={articleList}/> : <>{isError}<a href="" onClick={reRender}>Reload</a></>)}
   </>)
 
 }
