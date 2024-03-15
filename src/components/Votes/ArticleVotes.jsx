@@ -2,6 +2,7 @@ import { useContext } from "react"
 import UserContext from "../../contexts/User"
 import axios from "axios";
 import MessageContext from "../../contexts/Message";
+import './Votes.css'
 
 function ArticleVotes(props){
     const {article} = props
@@ -39,10 +40,10 @@ function ArticleVotes(props){
     }
 
     return (
-    <div>
-        <button onClick={updateVote} value="1" id={article.article_id} index={index}>+</button>
+    <div className="votes-container">
+        <button className="vote-button" onClick={updateVote} value="1" id={article.article_id} index={index}>🤌</button>
         <h4>Votes: {voteList[index]}</h4>
-        <button onClick={updateVote} value="-1" id={article.article_id} index={index}>-</button>
+        <button className="vote-button" onClick={updateVote} value="-1" id={article.article_id} index={index}>🤏</button>
     </div>)
 }
 

@@ -1,20 +1,53 @@
 h1{
     color: red;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 40px;
     text-align: center;
-    text-shadow: 2px 2px white;
+    text-shadow: 2px 2px 1px white;   
+}
+
+.main-title{
     grid-column: second;
 }
+
+.main-title h2{
+    color: white;
+    text-align:center;
+    text-shadow: 2px 2px 1px red;
+}
+
 .user-area{
     color: white;
     margin-left:auto;
     margin-right: 10%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
+img.mascot{
+    padding-top: 32px;
+    padding-left: 50px;
+    width: 100px;
+    height: 100px;
+    align-self:center;
+    justify-self: start;
+    object-fit:contain;
 }
 
 .user-area img{
     padding-left:auto;
     padding-right:0;
+    padding-top: 10px;
+    padding-bottom:10px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    align-self:center;
+    justify-self: center;
 }
 
 
@@ -22,8 +55,7 @@ h1{
 .head-box{
     width:100%;
     display:inline-grid;
-    grid-template-columns: [first] 40% [second] 20% [third] 40%;
-
+    grid-template-columns: [first] 35% [second] auto [third] 35%;
 }
 
 body{
@@ -33,15 +65,63 @@ body{
 }
 
 .innerBorderBox{
-    border: 20px solid blueviolet;
+    outline: 15px solid blueviolet;
+    border: 5px solid black;
     background-color: white;
-    margin: 40px 40px 40px 40px;
+    margin: 10px 40px 40px 40px;
     padding: 20px 20px 20px 20px;
 }
 
 nav{
-        margin-left: 30%;
-        margin-right:30%;
-        display: flex;
-        justify-content: space-between;
+    margin-left: 20%;
+    margin-right:20%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    a{
+        margin: 0px 10px 0px 10px;
+    }
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+@media (max-width:620px){
+    nav{
+        flex-direction: column;
+        a{
+            margin: 5px 10px 5px 10px;
+        }
+    }  
+}
+
+@media (max-width:630px){
+    .head-box{
+        display:flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    } 
+    .head-box h1,h2{
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+    .head-box h2{
+        margin-left:20%;
+        margin-right:20%;
+    }
+
+    img.mascot{
+        padding:0;
+        padding-top: 10px;
+    } 
+    .user-area{
+        margin:0;
+    }
+    p{
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+    nav{
+        margin-bottom:15px;
+    }
 }

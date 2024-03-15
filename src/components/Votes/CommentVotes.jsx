@@ -39,10 +39,10 @@ function CommentVotes(props){
     }
 
     return (
-    <div>
-        <button onClick={updateVote} value="1" id={comment.comment_id} index={index}>+</button>
+    <div className="votes-container">
+        <button className="vote-button" onClick={updateVote} value="1" id={comment.comment_id} index={index}>🤌</button>
         <h4>Votes: {voteList[index]}</h4>
-        <button onClick={updateVote} value="-1" id={comment.comment_id} index={index}>-</button>
+        <button className="vote-button" onClick={updateVote} value="-1" id={comment.comment_id} index={index}>🤏</button>
     </div>)
 }
 

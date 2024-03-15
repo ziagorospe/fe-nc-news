@@ -1,0 +1,13 @@
+.vote-button{
+    font-size: 24px;
+}
+
+.votes-container{
+    display:flex;
+    flex-direction: row-reverse;
+}
+
+h4{
+    justify-self: center;
+    align-self: center;
+}

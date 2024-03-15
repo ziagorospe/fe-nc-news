@@ -5,6 +5,9 @@ import axios from "axios"
 import CommentList from "../Comments/CommentList"
 import NewComment from "../Comments/NewComment"
 import ArticleVotes from "../Votes/ArticleVotes"
+import './Article.css'
+import capitalize from "../../utils/capitalize"
+
 
 function Article(props){
     const {focusArticle} = useContext(FocusArticleContext)
@@ -41,19 +44,26 @@ function Article(props){
         navigate(-1)
     }
 
-    return isLoading ? <p>Loading...</p> : !isError ? (<>
+    return isLoading ? <p>Loading...</p> : !isError ? (
+    <div className="article-page">
         <button onClick={goBack}>Back</button>
-        <article key={fetchedArticle.article_id}>
-            <img src={fetchedArticle.article_img_url} alt={fetchedArticle.title} style={{width:200+'px'}} />
-            <h2>Title: {fetchedArticle.title}</h2>
-            <h3>Author: {fetchedArticle.author}</h3>
-            <h4>Topic: {fetchedArticle.topic}</h4>
-            <h4>Date {fetchedArticle.created_at}</h4>
-            <p>Description: {fetchedArticle.body} </p>
-            <ArticleVotes article={fetchedArticle} index="0" voteList={voteList} setVoteList={setVoteList}/>
+        <article className="single-article" key={fetchedArticle.article_id}>
+            <div className="single-article-header">
+                <img src={fetchedArticle.article_img_url} alt={fetchedArticle.title} />
+                <div className="single-article-header-info">
+                    <h2>{fetchedArticle.title}</h2>
+                    <h3>By: {fetchedArticle.author}</h3>
+                    <h4>It's about {capitalize(fetchedArticle.topic)}</h4>
+                    <h4>Posted: {fetchedArticle.created_at.slice(0, 19).replace('T', ' ')}</h4>
+                </div>
+            </div>
+            <div className="single-article-body-votes">
+                <p>{fetchedArticle.body} </p>
+                <ArticleVotes article={fetchedArticle} index="0" voteList={voteList} setVoteList={setVoteList}/>
+            </div>
         </article>
         <NewComment commentList={commentList} setCommentList={setCommentList}/>
         <CommentList commentList={commentList} setCommentList={setCommentList}/>
-    </>) : <>{isError}<Link to="/" ><p>Return Home</p></Link></>
+    </div>) : <>{isError}<Link to="/" ><p>Return Home</p></Link></>
 }
 export default Article

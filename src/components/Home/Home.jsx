@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import axios from "axios";
 import MessageContext from "../../contexts/Message";
 import { Link, useParams, useSearchParams } from 'react-router-dom'
+import './Home.css'
 
 function Home(){
   const [articleList, setArticleList] = useState([])

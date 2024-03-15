@@ -16,7 +16,6 @@ function Account(props){
         setIsLoading(true)
         axios.get("https://backend-nc-news-project.onrender.com/api/users")
         .then((users)=>{
-            console.log(users.data.users)
             setUsersList(users.data.users)
             setIsLoading(false)
         })
@@ -74,7 +73,7 @@ function Account(props){
         {collapsedState==='none' ?  (!isLoading ? <><label htmlFor="select-user">Choose your fighter: </label>
         <select id="select-user" onChange={selectedUserChanged}>
             {usersList.map((user)=>{
-                return <option value={JSON.stringify(user)}>{user.username}</option>
+                return <option key={user.username} value={JSON.stringify(user)}>{user.username}</option>
             })}
         </select>
         <div style={{display: `${previewDisplayState}`}} >

@@ -12,6 +12,7 @@ import FocusArticleContext from "./contexts/FocusArticle";
 import MessageContext from "./contexts/Message";
 import './App.css'
 import NotFoundPage from "./components/NotFound/NotFoundPage";
+import mascot from '../assets/nc-news-mascot-no-bg.png'
 
 
 function App() {
@@ -32,8 +33,12 @@ function App() {
     <>
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
       <div className="head-box">
-      <h1>NC News</h1>
-      {currentUser.username ? <div className="user-area"><p>Logged in as {currentUser.username}</p><img style={{width:100+'px'}} src={currentUser.avatar_url}/></div> : null}
+        <img className="mascot "src={mascot}/>
+        <div className="main-title">
+          <h1>ZG News</h1>
+          <h2>Your #1 Source of Misinformation</h2>
+        </div>
+      {currentUser.username ? <div className="user-area"><p>Logged in as {currentUser.username}</p><img src={currentUser.avatar_url}/></div> : null}
       </div>
       <div className="innerBorderBox">
       <Navbar />
@@ -55,7 +60,7 @@ function App() {
             <Route path="account" element={
               <Account />
             }/>
-            <Route component={
+            <Route path="*" element={
               <NotFoundPage/>
             }/>
           </Routes>

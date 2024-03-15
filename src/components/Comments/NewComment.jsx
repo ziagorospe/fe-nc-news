@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import FocusArticleContext from "../../contexts/FocusArticle"
 import UserContext from "../../contexts/User"
 import MessageContext from "../../contexts/Message"
+import "./NewComment.css"
 
 function NewComment(props){
     const {focusArticle} = useContext(FocusArticleContext)
@@ -45,11 +46,12 @@ function NewComment(props){
         setCommentText(event.target.value)
     }
 
-    return (<form onSubmit={postComment}>
-        <label htmlFor="comment-text">What's on your mind?:</label>
-        <br/>
-        <input onChange={changeText} value={commentText} id="comment-text" type="text" placeholder="Write..." required/>
-        <button type="submit">Post!</button>
+    return (
+    <form className="newcomment-form" onSubmit={postComment}>
+        <label htmlFor="comment-text">but.. how does it make you feel?</label>
+            <textarea rows={5} cols={100} onChange={changeText} value={commentText} id="comment-text" type="text" placeholder="Write..." required/>
+            <button type="submit">Post!</button>
+        
     </form>)
 }
 
