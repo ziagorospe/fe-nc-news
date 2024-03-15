@@ -11,6 +11,7 @@ import UserMessage from "./components/UserMessage/UserMessage";
 import FocusArticleContext from "./contexts/FocusArticle";
 import MessageContext from "./contexts/Message";
 import './App.css'
+import NotFoundPage from "./components/NotFound/NotFoundPage";
 
 
 function App() {
@@ -30,10 +31,12 @@ function App() {
   return (
     <>
     <UserContext.Provider value={{currentUser, setCurrentUser}}>
+      <div className="head-box">
       <h1>NC News</h1>
+      {currentUser.username ? <div className="user-area"><p>Logged in as {currentUser.username}</p><img style={{width:100+'px'}} src={currentUser.avatar_url}/></div> : null}
+      </div>
       <div className="innerBorderBox">
       <Navbar />
-      {currentUser.username ? <><p>Logged in as {currentUser.username}</p><img style={{width:100+'px'}} src={currentUser.avatar_url}/></> : null}
       <MessageContext.Provider value={{responseMessage, setResponseMessage}}>
         <UserMessage />
         <FocusArticleContext.Provider value={{focusArticle, setFocusArticle}}>
@@ -51,6 +54,9 @@ function App() {
             }/>
             <Route path="account" element={
               <Account />
+            }/>
+            <Route component={
+              <NotFoundPage/>
             }/>
           </Routes>
         </FocusArticleContext.Provider>

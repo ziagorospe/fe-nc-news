@@ -45,10 +45,10 @@ function Article(props){
         <button onClick={goBack}>Back</button>
         <article key={fetchedArticle.article_id}>
             <img src={fetchedArticle.article_img_url} alt={fetchedArticle.title} style={{width:200+'px'}} />
-            <h1>Title: {fetchedArticle.title}</h1>
-            <h2>Author: {fetchedArticle.author}</h2>
-            <h3>Topic: {fetchedArticle.topic}</h3>
-            <h3>Date {fetchedArticle.created_at}</h3>
+            <h2>Title: {fetchedArticle.title}</h2>
+            <h3>Author: {fetchedArticle.author}</h3>
+            <h4>Topic: {fetchedArticle.topic}</h4>
+            <h4>Date {fetchedArticle.created_at}</h4>
             <p>Description: {fetchedArticle.body} </p>
             <ArticleVotes article={fetchedArticle} index="0" voteList={voteList} setVoteList={setVoteList}/>
         </article>

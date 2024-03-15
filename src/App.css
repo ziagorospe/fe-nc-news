@@ -2,7 +2,28 @@ h1{
     color: red;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
-    text-shadow: 1px 1px white;
+    text-shadow: 2px 2px white;
+    grid-column: second;
+}
+.user-area{
+    color: white;
+    margin-left:auto;
+    margin-right: 10%;
+
+}
+
+.user-area img{
+    padding-left:auto;
+    padding-right:0;
+}
+
+
+
+.head-box{
+    width:100%;
+    display:inline-grid;
+    grid-template-columns: [first] 40% [second] 20% [third] 40%;
+
 }
 
 body{
