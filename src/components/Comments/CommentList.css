@@ -27,3 +27,28 @@
         margin-bottom:5px;
     }
 }
+
+@media (max-width:700px){
+    .comment-list-container{
+        margin:10px 0;
+        padding: 1px 10px 10px 10px;
+        width:auto;
+        outline: 0;
+        h4, h5, p{
+            margin-left:0;
+            margin-right:0;
+        }
+        .comment-list-item{
+            padding:10px;
+        }
+        .votes-container{
+            margin-top:10px;
+            margin-bottom:10px;
+            button{
+                margin-left: 5px;
+                margin-right:5px;
+            }
+        }
+    }
+
+}

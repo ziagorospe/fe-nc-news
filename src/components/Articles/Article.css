@@ -39,3 +39,37 @@ article.single-article{
         margin-bottom: 10px;
     }
 }
+
+@media (max-width:700px){
+    .article-page{
+        margin:30px 0;
+        padding-top: 1px;
+        padding-left:0;
+        padding-right:0;
+        width:auto;
+        outline: 10px solid rgb(25, 138, 57);
+        article{
+            margin:0 0 10px 0;
+            outline:0px;
+            border: 5px solid black;
+        }
+        .single-article{
+            margin-top:10px;
+            h3, h4{
+                margin-top:0;
+                margin-bottom:0;
+            }
+        }
+        .single-article-header{
+            flex-direction: column;
+            img{
+                object-fit:cover;
+                width:100%;
+            }
+        }
+        .votes-container{
+            justify-content: center;
+        }
+    }
+
+}
